@@ -1,12 +1,11 @@
 import PRODUCTS from './products'
 import { ProductCard } from './ProductCard'
-import styles from './page.module.css'
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <main className='max-w-[960px] mx-auto flex flex-wrap'>
       {PRODUCTS.map((product) => (
-        <div className={styles.card} key={product.id}>
+        <div key={product.id} className="w-full md:w-1/3 p-2">
           <ProductCard product={product} />
         </div>
       ))}
