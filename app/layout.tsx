@@ -1,9 +1,6 @@
-import React from 'react'
+import * as stylex from '@stylexjs/stylex'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,10 +13,27 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en'>
-      <body className={`${inter.className} dark:bg-black dark:text-white`}>
-        {children}
-      </body>
+    <html {...stylex.props(styles.html, styles.reset)} lang='en'>
+      <body {...stylex.props(styles.reset)}>{children}</body>
     </html>
   )
 }
+
+const DARK = '@media (prefers-color-scheme: dark)'
+
+const styles = stylex.create({
+  html: {
+    fontFamily: 'system-ui, sans-serif',
+    backgroundColor: 'white',
+    color: 'black',
+    [DARK]: {
+      backgroundColor: 'black',
+      color: 'white'
+    }
+  },
+  reset: {
+    minHeight: '100%',
+    margin: 0,
+    padding: 0
+  }
+})
