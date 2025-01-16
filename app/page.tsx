@@ -1,39 +1,35 @@
-import * as stylex from '@stylexjs/stylex'
-
+import { styled, css } from '@pigment-css/react'
 import PRODUCTS from './products'
 import { ProductCard } from './ProductCard'
 
+const MOBILE = '@media screen and (max-width: 768px)'
+
+const mainClass = css`
+  margin: 0 auto;
+  max-width: 960px;
+  font-family: sans-serif;
+  display: flex;
+  flex-wrap: wrap;
+`
+
+const Card = styled('div')`
+  padding: 0.2rem;
+  width: 33%;
+  max-width: 33%;
+  ${() => MOBILE} {
+    width: 100%;
+    max-width: 100%;
+  }
+`
+
 export default function Home() {
   return (
-    <main {...stylex.props(s.main)}>
+    <main className={mainClass}>
       {PRODUCTS.map((product) => (
-        <div key={product.id} {...stylex.props(s.card)}>
+        <Card key={product.id}>
           <ProductCard product={product} />
-        </div>
+        </Card>
       ))}
     </main>
   )
 }
-
-const MOBILE = '@media screen and (max-width: 768px)'
-
-const s = stylex.create({
-  main: {
-    margin: '0 auto',
-    maxWidth: 960,
-    fontFamily: 'sans-serif',
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  card: {
-    padding: '0.2rem',
-    width: {
-      default: '33%',
-      [MOBILE]: '100%'
-    },
-    maxWidth: {
-      default: '33%',
-      [MOBILE]: '100%'
-    }
-  }
-})
