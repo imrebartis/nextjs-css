@@ -1,15 +1,24 @@
+import { withPigment, extendTheme } from '@pigment-css/nextjs-plugin'
+
 /** @type {import('next').NextConfig} */
-import stylexPlugin from '@stylexjs/nextjs-plugin'
-import { fileURLToPath } from 'url'
-import { dirname } from 'path'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
+const nextConfig = {}
 
-const nextConfig = {
-  transpilePackages: ['@stylexjs/open-props']
-}
-
-export default stylexPlugin({
-  rootDir: __dirname
-})(nextConfig)
+export default withPigment(nextConfig, {
+  theme: extendTheme({
+    colorSchemes: {
+      light: {
+        colors: {
+          background: 'white',
+          foreground: 'black'
+        }
+      },
+      dark: {
+        colors: {
+          background: 'black',
+          foreground: 'white'
+        }
+      }
+    }
+  })
+})
