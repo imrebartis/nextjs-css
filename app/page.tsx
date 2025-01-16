@@ -1,35 +1,32 @@
-import { styled, css } from '@pigment-css/react'
-import PRODUCTS from './products'
+'use client'
+import styled from '@emotion/styled'
 import { ProductCard } from './ProductCard'
+import PRODUCTS from './products'
 
-const MOBILE = '@media screen and (max-width: 768px)'
-
-const mainClass = css`
+const Main = styled.main`
   margin: 0 auto;
   max-width: 960px;
-  font-family: sans-serif;
+  background-color: black;
   display: flex;
   flex-wrap: wrap;
 `
 
-const Card = styled('div')`
-  padding: 0.2rem;
+const Card = styled.div`
   width: 33%;
-  max-width: 33%;
-  ${() => MOBILE} {
+  padding: 0.2rem;
+  @media screen and (max-width: 768px) {
     width: 100%;
-    max-width: 100%;
   }
 `
 
 export default function Home() {
   return (
-    <main className={mainClass}>
+    <Main>
       {PRODUCTS.map((product) => (
         <Card key={product.id}>
           <ProductCard product={product} />
         </Card>
       ))}
-    </main>
+    </Main>
   )
 }
